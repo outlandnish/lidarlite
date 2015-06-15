@@ -1,0 +1,9 @@
+LIDARLite	KEYWORD1
+distance	KEYWORD2
+velocity	KEYWORD2
+mean_distance	KEYWORD2
+mean_velocity	KEYWORD2
+scale_velocity	KEYWORD2
+reset	KEYWORD2
+read_registers	KEYWORD2
+write_register	KEYWORD2
