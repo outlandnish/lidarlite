@@ -1,5 +1,6 @@
-#include "lidarlite.h"
+#include "Arduino.h"
 #include <I2C.h>
+#include "LIDARLite.h"
 
 /*
 	A tidy little package to use the PulsedLight3D LIDAR-Lite through the I2C interface.
@@ -38,7 +39,7 @@ int LIDARLite::velocity() {
 	return (int)((char)data[0]); // Convert 1 byte to char and then to int to get signed int value for velocity measurement
 }
 
-double LIDARLite::mean_distance(int readings = 2) {
+double LIDARLite::mean_distance(int readings) {
 	if (readings < 2)
 		readings = 2;
 	int sum = 0;
@@ -47,7 +48,7 @@ double LIDARLite::mean_distance(int readings = 2) {
 	return sum / readings; // Divide the total by the number of readings to get the average
 }
 
-double LIDARLite::mean_velocity(int readings = 2) {
+double LIDARLite::mean_velocity(int readings) {
 	if (readings < 2)
 		readings = 2;
 	int sum = 0;
@@ -64,11 +65,11 @@ void LIDARLite::reset() {
 	write_register(RegisterMeasure, ResetCmd);
 }
 
-void calibrate(byte offset) {
-	write_register(RegisterCalibrate, offset);
+void LIDARLite::calibrate(byte offset) {
+	write_register(RegisterCalibrate, (char)offset);
 }
 	
-byte LIDARLite::read_registers(char address, int numBytes, byte data[2]) {
+byte* LIDARLite::read_registers(char address, int numBytes, byte data[2]) {
 	uint8_t nackack = 100; // Setup variable to hold ACK/NACK resopnses     
 	while (nackack != 0){ // While NACK keep going (i.e. continue polling until sucess message (ACK) is received )
 		nackack = I2c.read(LIDARLite_ADDRESS, address, numBytes, data); // Read 1-2 Bytes from LIDAR-Lite Address and store in array

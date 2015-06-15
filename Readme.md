@@ -34,7 +34,6 @@ void loop() {
 	
 	// read velocity
 	int velo = lidar.velocity();
-		
 }
 ```
 

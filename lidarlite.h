@@ -1,5 +1,7 @@
-#ifdef LIDARLITE_H
-#define LIDARLITE_H
+#ifndef LIDARLite_h
+#define LIDARLite_h
+
+#include "Arduino.h"
 
 #define		LIDARLite_ADDRESS	0x62		// Default I2C Address of LIDAR-Lite
 
@@ -13,16 +15,19 @@
 #define		ReadDistanceCmd		0x04		// Value to initiate ranging
 #define		ReadVelocityCmd		0x80		// Value to initiate velocity measurement
 
-#include <WProgram.h>
-#include "velocityscale.h"
+enum VelocityScale {
+	Period_100_MS = 0xC8,	//	0.10 m/s
+	Period_40_MS = 0x50,	//	0.25 m/s
+	Period_20_MS = 0x28,	//	0.50 m/s
+	Period_10_MS = 0x14		//	1.00 m/s
+};
 
-class LIDARLite {
-public:
-	//default constructor + destructor
-	LIDARLite();
-	~LIDARLite();
-	
-	// single readings
+class LIDARLite
+{
+   public:
+     LIDARLite();
+	 ~LIDARLite();
+     // single readings
 	int distance();	
 	int velocity();
 	
@@ -37,13 +42,12 @@ public:
 	
 	// reset the LIDAR-Lite
 	void reset();
-	
-private:	
+   private:	
 	// Read 1-2 bytes from a register and wait until it responds with success
-	byte read_registers(char address, int numBytes, byte data[2]);
+	byte* read_registers(char address, int numBytes, byte data[]);
 	
 	// Write a register and wait until it responds with success
 	void write_register(char address, char val);
-}
+};
 
 #endif
