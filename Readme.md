@@ -8,6 +8,8 @@ With this, you'll be able to:
  * Get smoothed (averaged) distance and velocity readings
  * Set the [velocity scaling](http://kb.pulsedlight3d.com/support/solutions/articles/5000549527-velocity-measurement)
  * Reset and calibrate the LIDAR-Lite
+ 
+ This project is more of an exercise in creating an Arduino library. You'll notice that most of the code is identical to the State Machine Sample code for the LIDAR-Lite.
 
 ### Setup
 1. Download and copy the DSS Circuits [Arduino I2C Master Library](http://www.dsscircuits.com/index.php/articles/66-arduino-i2c-master-library) to your Arduino > libraries folder.
