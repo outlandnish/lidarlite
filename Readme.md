@@ -18,8 +18,7 @@ With this, you'll be able to:
 
 ```c++
 #include <I2C.h>
-#include <lidarlite.h>
-#include <velocityscale.h>
+#include <LIDARLite.h>
 
 LIDARLite lidar;	
 
